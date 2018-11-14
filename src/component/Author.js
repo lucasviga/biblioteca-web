@@ -7,10 +7,9 @@ export default class Author extends Component {
 
     return (
         <li>
-            <strong>Nome: {author.firstName}</strong>
-            <p>Sobrenome: {author.lastName}</p>
-            <button>Excluir</button>
-            <button>Editar</button>
+          <spam>#{author.id}: </spam>
+          <strong>Nome: {author.firstName}</strong>
+          <p>Sobrenome: {author.lastName}</p>
         </li>
     );
   }

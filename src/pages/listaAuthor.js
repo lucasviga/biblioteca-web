@@ -6,6 +6,8 @@ export default class listaAuthor extends Component {
 
     state = {
         authors: [],
+        newFirstName: '',
+        newLastName: '',
     }
 
     async componentDidMount (){
@@ -14,14 +16,29 @@ export default class listaAuthor extends Component {
         this.setState({authors: response.data});
     }
 
+    handleNewAuthor = async () => {
+        const firstName = this.state.newFirstName;
+        const lastName = this.state.newLastName;
+
+        await api.post('authors', {firstName, lastName});
+    }
+
+    handleInputChange = e => {
+        this.setState({newFirstName: e.target.value});
+    }
+
+    handleInputChangeLastName = e => {
+        this.setState({newLastName: e.target.value});
+    }
+
     render(){
         return(
             <div>
                 <h1>Inserir novo autor</h1>
-                <form>
-                    <input placeholder="nome" />
-                    <input placeholder="sobrenome" />
-                    <button>Inserir</button>
+                <form onSubmit={this.handleNewAuthor}>
+                    <input onChange={this.handleInputChange} placeholder="nome" />
+                    <input onChange={this.handleInputChangeLastName} placeholder="sobrenome" />
+                    <button type="submit">Inserir</button>
                 </form>
                 <h1>Lista de Autores</h1>
                 <ul>
